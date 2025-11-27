@@ -1,0 +1,4 @@
+name: FK_Balance
+version: '1.0-SNAPSHOT'
+main: br.ufpb.dcx.lima.albiere.fK_Balance.FK_Balance
+api-version: '1.21'

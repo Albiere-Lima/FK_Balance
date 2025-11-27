@@ -1,0 +1,10 @@
+essentials:
+  prefix: "&a&lFK_BALANCE &f"
+
+
+mysql:
+  database: fk_balance
+  table: balances
+  user: root
+  password: ''
+  ip: localhost

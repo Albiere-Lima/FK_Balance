@@ -1,0 +1,247 @@
+package br.ufpb.dcx.lima.albiere.fK_Balance.configs;
+
+import com.google.common.base.Charsets;
+import com.google.common.base.Preconditions;
+import com.google.common.io.Files;
+import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.FileConfigurationOptions;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.*;
+import java.util.Objects;
+
+public class FileConfigurationExtends extends FileConfiguration {
+
+    /**
+     * This is a base class for all File based implementations of {@link
+     * Configuration}
+     */
+
+        /**
+         * Creates an empty {@link org.bukkit.configuration.file.FileConfiguration} with no default values.
+         */
+        public FileConfigurationExtends(@NotNull FileConfiguration original) {
+            // Chama o construtor vazio da superclasse para iniciar um objeto limpo
+            super();
+
+            // 1. Copia todas as chaves e valores da configuração original
+            // O argumento 'true' para getKeys garante que copiemos chaves aninhadas (ex: 'messages.welcome')
+            for (String key : original.getKeys(true)) {
+                this.set(key, original.get(key));
+            }
+
+            // 2. Copia a seção de padrões (defaults) da configuração original, se ela existir
+            if (original.getDefaults() != null) {
+                this.setDefaults(original.getDefaults());
+            }
+
+            // 3. Copia as opções importantes (como header, copyDefaults, etc.)
+            this.options().copyDefaults(original.options().copyDefaults());
+            this.options().copyHeader(original.options().copyHeader());
+            this.options().pathSeparator(original.options().pathSeparator());
+        }
+
+        /**
+         * Saves this {@link org.bukkit.configuration.file.FileConfiguration} to the specified location.
+         * <p>
+         * If the file does not exist, it will be created. If already exists, it
+         * will be overwritten. If it cannot be overwritten or created, an
+         * exception will be thrown.
+         * <p>
+         * This method will save using the system default encoding, or possibly
+         * using UTF8.
+         *
+         * @param file File to save to.
+         * @throws IOException Thrown when the given file cannot be written to for
+         *     any reason.
+         * @throws IllegalArgumentException Thrown when file is null.
+         */
+        public void save(@NotNull File file) throws IOException {
+            Preconditions.checkArgument(file != null, "File cannot be null");
+
+            Files.createParentDirs(file);
+
+            String data = saveToString();
+
+            Writer writer = new OutputStreamWriter(new FileOutputStream(file), Charsets.UTF_8);
+
+            try {
+                writer.write(data);
+            } finally {
+                writer.close();
+            }
+        }
+
+        /**
+         * Saves this {@link org.bukkit.configuration.file.FileConfiguration} to the specified location.
+         * <p>
+         * If the file does not exist, it will be created. If already exists, it
+         * will be overwritten. If it cannot be overwritten or created, an
+         * exception will be thrown.
+         * <p>
+         * This method will save using the system default encoding, or possibly
+         * using UTF8.
+         *
+         * @param file File to save to.
+         * @throws IOException Thrown when the given file cannot be written to for
+         *     any reason.
+         * @throws IllegalArgumentException Thrown when file is null.
+         */
+        public void save(@NotNull String file) throws IOException {
+            Preconditions.checkArgument(file != null, "File cannot be null");
+
+            save(new File(file));
+        }
+
+    @Override
+    public @NotNull String saveToString() {
+        return "";
+    }
+
+    /**
+         * Saves this {@link org.bukkit.configuration.file.FileConfiguration} to a string, and returns it.
+         *
+         * @return String containing this configuration.
+         */
+
+        /**
+         * Loads this {@link org.bukkit.configuration.file.FileConfiguration} from the specified location.
+         * <p>
+         * All the values contained within this configuration will be removed,
+         * leaving only settings and defaults, and the new values will be loaded
+         * from the given file.
+         * <p>
+         * If the file cannot be loaded for any reason, an exception will be
+         * thrown.
+         *
+         * @param file File to load from.
+         * @throws FileNotFoundException Thrown when the given file cannot be
+         *     opened.
+         * @throws IOException Thrown when the given file cannot be read.
+         * @throws InvalidConfigurationException Thrown when the given file is not
+         *     a valid Configuration.
+         * @throws IllegalArgumentException Thrown when file is null.
+         */
+        public void load(@NotNull File file) throws FileNotFoundException, IOException, InvalidConfigurationException {
+            Preconditions.checkArgument(file != null, "File cannot be null");
+
+            final FileInputStream stream = new FileInputStream(file);
+
+            load(new InputStreamReader(stream, Charsets.UTF_8));
+        }
+
+        /**
+         * Loads this {@link org.bukkit.configuration.file.FileConfiguration} from the specified reader.
+         * <p>
+         * All the values contained within this configuration will be removed,
+         * leaving only settings and defaults, and the new values will be loaded
+         * from the given stream.
+         *
+         * @param reader the reader to load from
+         * @throws IOException thrown when underlying reader throws an IOException
+         * @throws InvalidConfigurationException thrown when the reader does not
+         *      represent a valid Configuration
+         * @throws IllegalArgumentException thrown when reader is null
+         */
+        public void load(@NotNull Reader reader) throws IOException, InvalidConfigurationException {
+            BufferedReader input = reader instanceof BufferedReader ? (BufferedReader) reader : new BufferedReader(reader);
+
+            StringBuilder builder = new StringBuilder();
+
+            try {
+                String line;
+
+                while ((line = input.readLine()) != null) {
+                    builder.append(line);
+                    builder.append('\n');
+                }
+            } finally {
+                input.close();
+            }
+
+            loadFromString(builder.toString());
+        }
+
+        /**
+         * Loads this {@link org.bukkit.configuration.file.FileConfiguration} from the specified location.
+         * <p>
+         * All the values contained within this configuration will be removed,
+         * leaving only settings and defaults, and the new values will be loaded
+         * from the given file.
+         * <p>
+         * If the file cannot be loaded for any reason, an exception will be
+         * thrown.
+         *
+         * @param file File to load from.
+         * @throws FileNotFoundException Thrown when the given file cannot be
+         *     opened.
+         * @throws IOException Thrown when the given file cannot be read.
+         * @throws InvalidConfigurationException Thrown when the given file is not
+         *     a valid Configuration.
+         * @throws IllegalArgumentException Thrown when file is null.
+         */
+        public void load(@NotNull String file) throws FileNotFoundException, IOException, InvalidConfigurationException {
+            Preconditions.checkArgument(file != null, "File cannot be null");
+
+            load(new File(file));
+        }
+
+    @Override
+    public void loadFromString(@NotNull String contents) throws InvalidConfigurationException {
+
+    }
+
+    /**
+         * Loads this {@link org.bukkit.configuration.file.FileConfiguration} from the specified string, as
+         * opposed to from file.
+         * <p>
+         * All the values contained within this configuration will be removed,
+         * leaving only settings and defaults, and the new values will be loaded
+         * from the given string.
+         * <p>
+         * If the string is invalid in any way, an exception will be thrown.
+         *
+         * @param contents Contents of a Configuration to load.
+         * @throws InvalidConfigurationException Thrown if the specified string is
+         *     invalid.
+         * @throws IllegalArgumentException Thrown if contents is null.
+         */
+        /**
+         * @return empty string
+         *
+         * @deprecated This method only exists for backwards compatibility. It will
+         * do nothing and should not be used! Please use
+         * {@link FileConfigurationOptions#getHeader()} instead.
+         */
+        @NotNull
+        @Deprecated(since = "1.18.1")
+        protected String buildHeader() {
+            return "";
+        }
+
+        @NotNull
+        @Override
+        public FileConfigurationOptions options() {
+            return (FileConfigurationOptions) super.options();
+        }
+
+
+        public String getColouredString(String path) {
+            return Objects.requireNonNull(getString(path)).replaceAll("&", "§");
+        }
+
+    }
+
