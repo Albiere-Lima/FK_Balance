@@ -34,8 +34,7 @@ public class BalanceCommand extends BaseCommand {
                 String balanceString = bigDecimaltoString(String.valueOf(manager.getEconomy(command).get().getBalance(((Player) sender).getUniqueId())));
                 String prefix = manager.getEconomy(command).get().getPrefix();
                 String finalMessage = messageTemplate
-                        .replace("{Balance}", balanceString)
-                        .replace("{PrefixBalance}", prefix);
+                        .replace("{Balance}", prefix + " " + balanceString);
                 sender.sendMessage(finalMessage);
             } catch(Exception e) {
                 throw new MessageCommandNotDefienedException("Comando: "+command+" está com configurações faltando! Por favor, verifique os arquivos: economies.yml, messages.yml");

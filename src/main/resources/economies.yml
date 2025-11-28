@@ -1,0 +1,7 @@
+money:
+  prefix: '&a&lMONEY &f'
+  prefixBalance: 'R$'
+
+tokens:
+  prefix: '&b&lTOKENS &f'
+  prefixBalance: '¥'

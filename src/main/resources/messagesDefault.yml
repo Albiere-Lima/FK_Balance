@@ -1,2 +1,67 @@
 money:
-  seeYouBalance: 'Você Possue {PrefixBalance} {Balance}'
+  # --- Ver Saldo (/money see) ---
+  seeYouBalance: 'Seu saldo é: &6 {Balance}'
+  seeOthersBalance: 'O saldo de &b{Player} &aé: &6 {Balance}'
+
+  # --- Comandos Inválidos e Erros Gerais ---
+  noPermission: 'Você não tem permissão para usar este comando (&7{Permission}&c)!' # Adicionei {Permission} por boas práticas
+  invalidCommand: 'Uso incorreto! Use: &e{Command}'
+  playerIsNotOnline: 'O jogador &e{Player} &cnão está online ou não foi encontrado!'
+  numberFormatException: 'O valor digitado não é um número válido!'
+  numberNegative: 'O valor deve ser positivo!'
+  playerEquals: 'Você não pode fazer isso com você mesmo!'
+  lowerValue: 'Você não tem saldo suficiente para realizar esta transação!'
+
+  # --- Enviar Saldo (/money pay) ---
+  paySuccess:
+    Sender: 'Você enviou &6{Money} &apara &b{Player}&a.'
+    Player: 'Você recebeu &6{Money} &ade &b{Sender}&a.'
+
+  # --- Setar Saldo (/money set) ---
+  setSuccess:
+    Sender: 'Você setou seu saldo para: &6{Balance}'
+    PlayerY: 'Você setou o saldo de &b{Player} &apara: &6 {Balance}'
+    Player: 'Seu saldo foi setado para: &6{Balance} &apor &b{Sender}&a.'
+
+  # --- Dar Saldo (/money give) ---
+  giveSuccess:
+    Sender: 'Você adicionou &6{Money} &aao saldo de &b{Player}&a.'
+    PlayerY: 'Você adicionou &6{Money} &aao saldo de &b{Player}&a.'
+    Player: 'Você recebeu &6{Money} &aadministrado por &b{Sender}&a.'
+
+  # --- Recarga de Configurações (/money forcereload) ---
+  reloadSuccess: '&aConfigurações de economia atualizadas com sucesso!'
+
+token:
+  # --- Ver Saldo (/money see) ---
+  seeYouBalance: 'Seu saldo é: &6 {Balance}'
+  seeOthersBalance: 'O saldo de &b{Player} &aé: &6 {Balance}'
+
+  # --- Comandos Inválidos e Erros Gerais ---
+  noPermission: 'Você não tem permissão para usar este comando (&7{Permission}&c)!' # Adicionei {Permission} por boas práticas
+  invalidCommand: 'Uso incorreto! Use: &e{Command}'
+  playerIsNotOnline: 'O jogador &e{Player} &cnão está online ou não foi encontrado!'
+  numberFormatException: 'O valor digitado não é um número válido!'
+  numberNegative: 'O valor deve ser positivo!'
+  playerEquals: 'Você não pode fazer isso com você mesmo!'
+  lowerValue: 'Você não tem saldo suficiente para realizar esta transação!'
+
+  # --- Enviar Saldo (/money pay) ---
+  paySuccess:
+    Sender: 'Você enviou &6{Money} &apara &b{Player}&a.'
+    Player: 'Você recebeu &6{Money} &ade &b{Sender}&a.'
+
+  # --- Setar Saldo (/money set) ---
+  setSuccess:
+    Sender: 'Você setou seu saldo para: &6{Balance}'
+    PlayerY: 'Você setou o saldo de &b{Player} &apara: &6 {Balance}'
+    Player: 'Seu saldo foi setado para: &6{Balance} &apor &b{Sender}&a.'
+
+  # --- Dar Saldo (/money give) ---
+  giveSuccess:
+    Sender: 'Você adicionou &6{Money} &aao saldo de &b{Player}&a.'
+    PlayerY: 'Você adicionou &6{Money} &aao saldo de &b{Player}&a.'
+    Player: 'Você recebeu &6{Money} &aadministrado por &b{Sender}&a.'
+
+  # --- Recarga de Configurações (/money forcereload) ---
+  reloadSuccess: 'Configurações de economia atualizadas com sucesso!'

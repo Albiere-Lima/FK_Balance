@@ -54,6 +54,7 @@ public final class FK_Balance extends JavaPlugin {
     @Override
     public void onDisable() {
         System.out.println(prefix + "Desligando...");
+        economiesManager.saveAllBalancesToDatabase();
     }
 
     public void loadEconomies() {
@@ -73,8 +74,10 @@ public final class FK_Balance extends JavaPlugin {
 
     public static void loadAllConfigs() {
         fileManager = new Config(getPlugin());
+        fileManager.reloadAllConfigs();
         config = fileManager.getConfig("config");
         prefix = config.getColouredString("essentials.prefix");
+
 
         messagesConfig = fileManager.getConfig("messages");
         economies = fileManager.getConfig("economies");
