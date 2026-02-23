@@ -34,7 +34,8 @@
 
 | Comando | Descrição |
 
-<Balance> - Usado para dizer o nome da balance nas configurações.
+`<Balance>` - Usado para dizer o nome da balance nas configurações.
+
 | :--- | :--- |
 
 | `/<Balance>` | Visualiza o seu saldo atual em todas as moedas. |
