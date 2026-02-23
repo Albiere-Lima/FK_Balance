@@ -38,9 +38,13 @@
 | :--- | :--- |
 
 | `/<Balance>` | Visualiza o seu saldo atual em todas as moedas. |
+
 | `/<Balance> pay <jogador> <quantia>` | Transfere valores para outro usuário. |
+
 | `/<Balance> top` | Exibe o ranking dos jogadores mais ricos. |
+
 | `/<Balance> give/set/take` | (Admin) Gerencia a economia do servidor. |
+
 
 ## 🚀 Como contribuir
 
