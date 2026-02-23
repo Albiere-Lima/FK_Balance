@@ -33,8 +33,10 @@
 ## 💻 Comandos Principais
 
 | Comando | Descrição |
+
 <Balance> - Usado para dizer o nome da balance nas configurações.
 | :--- | :--- |
+
 | `/<Balance>` | Visualiza o seu saldo atual em todas as moedas. |
 | `/<Balance> pay <jogador> <quantia>` | Transfere valores para outro usuário. |
 | `/<Balance> top` | Exibe o ranking dos jogadores mais ricos. |
